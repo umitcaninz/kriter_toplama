@@ -153,7 +153,7 @@ elif st.session_state.sayfa == 3:
     if st.button("Geri"):
         geri()
     if st.button("İleri"):
-        ileri()
+        st.session_state.sayfa = 4
 
 
 elif st.session_state.sayfa == 4:
