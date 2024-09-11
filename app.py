@@ -135,9 +135,9 @@ elif st.session_state.sayfa == 2:
             """
             <style>
             .red-button {
-                background-color: #f44336; /* Kırmızı renk */
-                color: white;
-                border: none;
+                background-color: white; /* Arka plan rengi beyaz */
+                color: #f44336; /* Kırmızı yazı rengi */
+                border: 2px solid #f44336; /* Kırmızı kenar rengi */
                 padding: 10px 20px;
                 text-align: center;
                 text-decoration: none;
@@ -152,6 +152,8 @@ elif st.session_state.sayfa == 2:
             """,
             unsafe_allow_html=True
         )
+
+        
     
     if st.button("Geri"):
         geri()
