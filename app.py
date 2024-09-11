@@ -128,14 +128,7 @@ elif st.session_state.sayfa == 2:
     
     ad = st.text_input("Adınız")
     soyad = st.text_input("Soyadınız")
-    
-    # Veri sözlüğüne erişim butonu yalnızca ad, soyad ve unvan girildiğinde aktif
-    if ad and soyad and unvan:
-        if st.button("Veri Sözlüğü'ne Erişmek İçin Tıklayınız"):
-            st.session_state.ad = ad
-            st.session_state.soyad = soyad
-            st.session_state.unvan = unvan
-            st.session_state.sayfa = 3        
+     
     if st.button("Geri"):
         geri()
     elif st.button("İleri"):
@@ -145,7 +138,7 @@ elif st.session_state.sayfa == 2:
             st.session_state.unvan = unvan
 
             # Ad, soyad ve unvan girildikten sonra 4. sayfaya geç
-            st.session_state.sayfa = 4
+            st.session_state.sayfa = 3
         else:
             st.write("Lütfen adınızı, soyadınızı ve görevinizi girin.")
 
