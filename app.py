@@ -149,6 +149,7 @@ elif st.session_state.sayfa == 3:
     if secilen_kriter:
         st.write(f"**{secilen_kriter} Tanımı:**")
         st.write(veri_sozlugu[secilen_kriter])
+        
     if st.button("Geri"):
         geri()
     if st.button("İleri"):
