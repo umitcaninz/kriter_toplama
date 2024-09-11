@@ -11,9 +11,11 @@ from email.mime.application import MIMEApplication
 
 
 birim_sifreleri = {
+    "Kütüphane Daire Başkanlığı" : "",
     "Öğrenci İşleri": "ARDEK",
     "BAP": "sifre2",
-    "TTO": "sifre3"
+    "TTO": "sifre3",
+    "PDO": "sifre4"
 }
 
 def birim_ismini_al(sifre):
@@ -122,23 +124,42 @@ elif st.session_state.sayfa == 3:
 
     # Fakülte ismine göre farklı formlar
     if st.session_state.fakulte_ismi == "Öğrenci İşleri":
-        bilimsel_yayin_sayisi = st.text_input("1.1. Bilimsel Yayın Sayısı Verisi Girin", value="0")
-        atif_sayisi = st.text_input("1.2. Atıf Sayısı Verisi Girin", value="0")
         ulusal_proje_sayisi = st.text_input("1.3. Ulusal Proje Sayısı  Verisi Girin", value="0")
-        incites_50_dilim = st.text_input("2.1.Incites %50 Dilime Giren Yayın Oranı", value="0")
-        incites_10_dilim = st.text_input("2.2.Incites %10 Dilime Giren Yayın Oranı", value="0")
-
         if st.button("Tamamla"):
             data = {
-                "1.1. Bilimsel Yayın Sayısı": bilimsel_yayin_sayisi,
-                "1.2. Atıf Sayısı": atif_sayisi,
-                "1.3. Ulusal Proje Sayısı ": ulusal_proje_sayisi,
-                "2.1.Incites Dergi Etki Değerinde %50’lik Dilime Giren Bilimsel Yayın Oranı  ": incites_50_dilim,
-                "2.2.Incites %10 Dilime Giren Yayın Oranı": incites_10_dilim
+                "1.3. Ulusal Proje Sayısı ": ulusal_proje_sayisi
             }
             st.session_state.df = pd.DataFrame([data])
             st.session_state.form_tamamlandi = True
 
+
+    
+    elif st.session_state.fakulte_ismi == "Kütüphane Daire Başkanlığı":
+        bilimsel_yayin_sayisi = st.text_input("1.1. Bilimsel Yayın Sayısı Verisi Girin", value="0")
+        atif_sayisi = st.text_input("1.2. Atıf Sayısı Verisi Girin", value="0")
+        incites_50_dilim = st.text_input("2.1.Incites %50 Dilime Giren Yayın Oranı", value="0")
+        incites_10_dilim = st.text_input("2.2.Incites %10 Dilime Giren Yayın Oranı", value="0")
+        acik_erisim = st.text_input("2.5. Açık Erişim Yüzdesi",value="0")
+        unv_unv_isbirlik = st.text_input("3.1.Üniversite-Üniversite İşbirlikli Yayın Oranı",value="0")
+        unv_sanayi = st.text_input("3.2. Üniversite-Sanayi İşbirlikli Yayın Oranı",value="0")
+        uluslarararası_isbirlik = st.text_input("3.3. Uluslararası İşbirlikli Yayın Oranı",value="0")
+        
+        if st.button("Tamamla"):
+            data = {
+                "1.1. Bilimsel Yayın Sayısı": bilimsel_yayin_sayisi,
+                "1.2. Atıf Sayısı": atif_sayisi,
+                "2.1.Incites Dergi Etki Değerinde %50’lik Dilime Giren Bilimsel Yayın Oranı  ": incites_50_dilim,
+                "2.2.Incites %10 Dilime Giren Yayın Oranı": incites_10_dilim,
+                "2.5. Açık Erişim Yüzdesi" : acik_erisim,
+                "3.1.Üniversite-Üniversite İşbirlikli Yayın Oranı" : unv_unv_isbirlik,
+                "3.2. Üniversite-Sanayi İşbirlikli Yayın Oranı" : unv_sanayi
+                "3.3. Uluslararası İşbirlikli Yayın Oranı" : uluslarararası_isbirlik
+            }
+            st.session_state.df = pd.DataFrame([data])
+            st.session_state.form_tamamlandi = True
+
+
+    
     elif st.session_state.fakulte_ismi == "BAP":
         ulusal_fon_tutarı = st.text_input("1.4. Ulusal Projelerden Elde Edilen Fon Tutarı Verisi Girin", value="0")
         uluslararası_fon_tutarı = st.text_input("1.5. Uluslararası Proje Fon Tutarı Verisi Girin", value="0")
@@ -167,6 +188,21 @@ elif st.session_state.sayfa == 3:
             st.session_state.df = pd.DataFrame([data])
             st.session_state.form_tamamlandi = True
 
+    elif st.session_state.fakulte_ismi == "PDO":
+        ulusal_patent = st.text_input("1.7. Ulusal Patent Belge Sayısı Verisi Girin", value="0")
+        uluslararasi_belge = st.text_input("1.8. Uluslararası Patent Belge Sayısı Verisi Girin", value="0")
+        tasarim_belge = st.text_input("1.9. Faydalı Model/Endüstriyel Tasarım Belge Sayısı Verisi Girin", value="0")
+
+        if st.button("Tamamla"):
+            data = {
+                "1.7. Ulusal Patent Belge Sayısı Verisi Girin": ulusal_patent,
+                "1.8. Uluslararası Patent Belge Sayısı Verisi Girin": uluslararasi_belge,
+                "1.9. Faydalı Model/Endüstriyel Tasarım Belge Sayısı Verisi Girin": tasarim_belge
+            }
+            st.session_state.df = pd.DataFrame([data])
+            st.session_state.form_tamamlandi = True    
+
+    
     # Form tamamlandıysa "Gönder" butonunu göster
     if st.session_state.form_tamamlandi:
         st.success("Form tamamlandı, şimdi gönderebilirsiniz.")
