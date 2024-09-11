@@ -145,14 +145,19 @@ elif st.session_state.sayfa == 3:
     st.markdown('<h1 style="color: red;">Veri Sözlüğü</h1>', unsafe_allow_html=True)
     
     secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Gösterge Seçin", list(veri_sozlugu.keys()))
+    
     if secilen_kriter:
         st.write(f"**{secilen_kriter} Tanımı:**")
         st.write(veri_sozlugu[secilen_kriter])
-        
-    if st.button("Geri"):
-        geri()
-    if st.button("İleri"):
-        ileri()
+    
+    # Sayfa geçiş butonları
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        if st.button("Geri"):
+            geri()
+    with col2:
+        if st.button("İleri"):
+            ileri()
 
 
 elif st.session_state.sayfa == 4:
