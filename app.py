@@ -124,11 +124,11 @@ elif st.session_state.sayfa == 3:
 
         if st.button("Tamamla"):
             data = {
-                "Bilimsel Yayın Sayısı": bilimsel_yayin_sayisi,
-                "Atıf Sayısı": atif_sayisi,
-                "Ulusal Proje Sayısı": ulusal_proje_sayisi,
-                "Incites %50 Dilim": incites_50_dilim,
-                "Incites %10 Dilim": incites_10_dilim
+                "1.1. Bilimsel Yayın Sayısı": bilimsel_yayin_sayisi,
+                "1.2. Atıf Sayısı": atif_sayisi,
+                "1.3. Ulusal Proje Sayısı ": ulusal_proje_sayisi,
+                "2.1.Incites Dergi Etki Değerinde %50’lik Dilime Giren Bilimsel Yayın Oranı  ": incites_50_dilim,
+                "2.2.Incites %10 Dilime Giren Yayın Oranı": incites_10_dilim
             }
             st.session_state.df = pd.DataFrame([data])
             st.session_state.form_tamamlandi = True
@@ -140,9 +140,9 @@ elif st.session_state.sayfa == 3:
 
         if st.button("Tamamla"):
             data = {
-                "Ulusal Proje Fon Tutarı": ulusal_fon_tutarı,
-                "Uluslararası Proje Fon Tutarı": uluslararası_fon_tutarı,
-                "Patent Başvuru Sayısı": patent_basvuru_sayisi
+                "1.4. Ulusal Projelerden Elde Edilen Fon Tutarı Verisi Girin": ulusal_fon_tutarı,
+                "1.5. Uluslararası Proje Fon Tutarı Verisi Girin": uluslararası_fon_tutarı,
+                "1.6. Patent (Ulusal ve Uluslararası) Başvuru Sayısı Verisi Girin": patent_basvuru_sayisi
             }
             st.session_state.df = pd.DataFrame([data])
             st.session_state.form_tamamlandi = True
@@ -154,9 +154,9 @@ elif st.session_state.sayfa == 3:
 
         if st.button("Tamamla"):
             data = {
-                "Ulusal Patent Belge Sayısı": ulusal_patent,
-                "Uluslararası Patent Belge Sayısı": uluslararasi_belge,
-                "Tasarım Belge Sayısı": tasarim_belge
+                "1.7. Ulusal Patent Belge Sayısı Verisi Girin": ulusal_patent,
+                "1.8. Uluslararası Patent Belge Sayısı Verisi Girin": uluslararasi_belge,
+                "1.9. Faydalı Model/Endüstriyel Tasarım Belge Sayısı Verisi Girin": tasarim_belge
             }
             st.session_state.df = pd.DataFrame([data])
             st.session_state.form_tamamlandi = True
