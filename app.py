@@ -12,7 +12,7 @@ from email.mime.application import MIMEApplication
 
 birim_sifreleri = {
     "Kütüphane Daire Başkanlığı" : "",
-    "Öğrenci İşleri": "ARDEK",
+    "Öğrenci İşleri": "sifre1",
     "BAP": "sifre2",
     "TTO": "sifre3",
     "PDO": "sifre4"
