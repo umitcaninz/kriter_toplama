@@ -93,13 +93,12 @@ if 'sayfa' not in st.session_state:
 if 'form_gonderildi' not in st.session_state:
     st.session_state.form_gonderildi = False
 
-def geri():
-    if st.session_state.sayfa > 1:
-        st.session_state.sayfa -= 1
-
 def ileri():
-    if st.session_state.sayfa < 4:  # Sayfa sınırını ayarlayın
-        st.session_state.sayfa += 1
+    st.session_state.sayfa += 1
+
+def geri():
+    st.session_state.sayfa -= 1
+
 
 if st.session_state.sayfa == 1:
     st.title("Yükseköğretim Kurulu Performans Göstergeleri Kurum İçi Veri Girişi")
