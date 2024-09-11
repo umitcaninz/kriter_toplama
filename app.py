@@ -7,6 +7,42 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 
+veri_sozlugu = {
+    "1.1. Bilimsel Yayın Sayısı": "2022 yılında ISI Citation Index (SCI, SCI-E, SSCI ve A&HCI) veri tabanında taranan dergilerdeki makale (article) ve derleme (review) türündeki yayın sayısı.",
+    "1.2. Atıf Sayısı": "ISI Citation Index (SCI, SCI-E, SSCI ve A&HCI) veri tabanında taranan dergilerde 2017-2022 yıllarını kapsayan dönemde yayınlanan tüm makale ve derlemelere yapılan toplam atıf sayısı.",
+    "1.3. Ulusal Ar-Ge ve Yenilik Destek Programlarından Alınan Proje Sayısı": "Ulusal Ar-Ge ve Yenilik Destek Programları tarafından desteklenen, 2022 yılında başlamış, devam eden veya tamamlanmış proje sayısı.",
+    "1.4. Ulusal Ar-Ge ve Yenilik Destek Programlarından Kuruma Aktarılan Fon Tutarı": "Ulusal Ar-Ge ve Yenilik Destek Programları tarafından desteklenen projeler kapsamında 2022 yılında kuruma aktarılan toplam bütçe tutarı.",
+    "1.5. Uluslararası Proje Fon Tutarı": "HORIZON 2020, İkili ve Çoklu İşbirlikleri, COST, ERA-NET gibi Uluslararası Destek Programları tarafından desteklenen projeler için 2022 yılında kuruma aktarılan toplam bütçe tutarı.",
+    "1.6. Ulusal ve Uluslararası Patent Başvuru Sayısı": "Son 3 yılda (2020-2022) Türk Patent ve Marka Kurumu'na yapılan ulusal ve uluslararası patent başvuru sayısı.",
+    "1.7. Ulusal Patent Belge Sayısı": "Son 3 yılda (2020-2022) Türk Patent ve Marka Kurumu tarafından tescillenmiş ulusal patent sayısı.",
+    "1.8. Uluslararası Patent Belge Sayısı": "Son 3 yılda (2020-2022) yurtdışı patent ofisleri tarafından tescillenmiş uluslararası patent sayısı.",
+    "1.9. Faydalı Model ve Tasarım Belge Sayısı": "Son 3 yılda (2020-2022) Türk Patent ve Marka Kurumu tarafından tescillenmiş faydalı model ve tasarım sayısı.",
+    "1.10. Ufuk Avrupa Proje Başvuru Sayısı": "Ufuk Avrupa 2022 yılı çağrıları kapsamında kurum veya kurum mensupları tarafından başvuru yapılan proje sayısı.",
+    "1.11. Ufuk Avrupa Kabul Edilen Proje Sayısı": "Ufuk Avrupa 2022 yılı çağrıları kapsamında TÜBİTAK tarafından kabul edilen proje sayısı.",
+    "2.1. Incites Dergi Etki Değerinde ilk %50’lik Dilime Giren Bilimsel Yayın Oranı": "2022 yılında Incites Dergi Etki Değerinde ilk %50’lik dilime giren (Q1+Q2) makale ve derleme türlerindeki yayınların sayısının aynı yıldaki toplam yayın sayısına oranı.",
+    "2.2. %10’luk Dilimde Atıf Alan Yayın Oranı": "2022 yılında ISI Citation Index veri tabanlarında taranan dergilerde yayınlanan ve %10’luk dilimde atıf alan makale ve derleme türlerindeki yayınların oranı.",
+    "2.3. Bilim Ödülü Sayısı": "2022 yılında kurum mensuplarının veya öğrencilerin aldığı YÖK, TÜBİTAK, TÜBA GEBİP ödülleri.",
+    "2.4. TÜBİTAK 1004 Programı Kapsamında Alınan Fon Tutarı": "TÜBİTAK 1004 Programı kapsamında 2022 yılında kuruma aktarılan fon tutarı.",
+    "2.5. Yayınların Açık Erişim Yüzdesi": "2022 yılında ISI Citation Index veri tabanında taranan dergilerdeki yayınların açık erişim oranı.",
+    "2.6. Dünya Akademik Sıralamalarındaki Performansı": "2022 yılında THE, QS, ARWU Dünya Akademik Genel Sıralamalarındaki yeri.",
+    "2.7. Akredite Edilmiş Program Sayısı": "2022 Yükseköğretim Programları ve Kontenjanları Kılavuzu'na göre akredite edilmiş toplam program sayısı.",
+    "2.8. Uluslararası Doktora Öğrenci Oranı": "2021-2022 öğretim yılında öğrenim gören yabancı uyruklu doktora öğrenci oranı.",
+    "2.9. Doktora Mezun Sayısı": "2021-2022 öğretim yılında mezun olan doktora öğrenci sayısı.",
+    "2.10. Doktora Öğrenci Sayısı": "2021-2022 öğretim yılı doktora öğrenci sayısı.",
+    "3.1. Üniversite-Üniversite İşbirlikli Yayın Oranı": "2022 yılında ISI Citation Index veri tabanında taranan dergilerde yayınlanan üniversite-üniversite işbirlikli yayınların oranı.",
+    "3.2. Üniversite-İş Dünyası İşbirlikli Yayın Oranı": "2022 yılında ISI Citation Index veri tabanında taranan dergilerde yayınlanan üniversite-iş dünyası işbirlikli yayınların oranı.",
+    "3.3. Uluslararası İşbirlikli Yayın Oranı": "2022 yılında ISI Citation Index veri tabanında taranan dergilerde yayınlanan uluslararası işbirlikli yayınların oranı.",
+    "3.4. Üniversite-İş Dünyası İşbirlikli Ulusal ve Uluslararası Patent Belge Sayısı": "Son 3 yılda tescillenmiş üniversite-iş dünyası işbirlikli ulusal ve uluslararası patent belge sayısı.",
+    "3.5. Uluslararası İşbirlikli Ulusal ve Uluslararası Patent Belge Sayısı": "Son 3 yılda tescillenmiş uluslararası işbirlikli ulusal ve uluslararası patent belge sayısı.",
+    "3.6. Kamu Fonları Kapsamında Üniversite-İş Dünyası İşbirliği ile Yapılan Ar-Ge ve Yenilik Projelerinden Alınan Fon Tutarı": "Kamu fonları kapsamında 2022 yılında kuruma aktarılan fon tutarı.",
+    "3.7. Kamu Fonları Kapsamında Üniversite – İş Dünyası İş birliği ile Yapılan Ar-Ge ve Yenilik Projeleri Sayısı": "Ulusal Ar-Ge ve Yenilik  Destek Programları tarafından desteklenen, 2022 yılında başlayan, devam eden ya da tamamlanan üniversite-iş dünyası iş birlikli proje sayısı (Ar-Ge ve yenilik alanında fon sağlayan kamu kuruluşları tarafından desteklenen projeler ile kamu destekli iş birliği projelerine sağlanan danışmanlık hizmetleri dahildir. Yatırım projeleri ve BAP projeleri hariçtir.) ",
+    "3.8. Uluslararası Öğrenci Oranı" : "Kurumun lisans, yüksek lisans ve doktora programlarında 2021-2022 öğretim yılında öğrenim gören yabancı uyruklu öğrenci sayısının toplam öğrenci sayısına oranı",
+    "3.9. Uluslararası Öğretim Üyesi Oranı" : "Kurumda 2021-2022 öğretim yılında Yabancı Diller Yüksek Okulu'ndaki görevlendirmeler dışında görevli yabancı uyruklu öğretim üyesi (Profesör, Doçent, Dr. Öğr. Üyesi) sayısının toplam öğretim üyesi sayısına oranı",
+    "3.10. Dolaşımdaki Öğretim Üyesi ve Öğrenci Sayısı" : "2022 yılında, Ulusal Ajans ve TÜBİTAK dolaşım programları kapsamında dolaşımda olan  kurum mensupları ve öğrenci sayısı (gelen ve giden ayrımında)",
+    "3.11. TÜBİTAK 2244 Sanayi Doktora Programı Öğrenci" : "2022 yılında TÜBİTAK 2244 Sanayi Doktora Programı'ndan yararlanan kayıtlı toplam öğrenci sayısı"
+
+
+}
 
 
 
