@@ -79,8 +79,8 @@ elif st.session_state.sayfa == 2:
     st.title("Veriyi Giren Kullanıcının Bilgileri")
     st.write(f"Birim: {st.session_state.fakulte_ismi}")
     
-    unvanlar = ["İdari Personel","Araştırma Görevlisi", "Doktor Öğretim Üyesi", "Doçent", "Profesör", "Uzman", "Öğretim Görevlisi"]
-    unvan = st.selectbox("Ünvanınız", unvanlar)
+    unvanlar = ["İdari Personel","Akademik Personel"]
+    unvan = st.selectbox("Göreviniz", unvanlar)
     
     ad = st.text_input("Adınız")
     soyad = st.text_input("Soyadınız")
