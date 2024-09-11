@@ -241,7 +241,9 @@ elif st.session_state.sayfa == 4:
         ulusal_patent = st.text_input("1.7. Ulusal Patent Belge Sayısı Verisi Girin", value="0")
         uluslararasi_belge = st.text_input("1.8. Uluslararası Patent Belge Sayısı Verisi Girin", value="0")
         tasarim_belge = st.text_input("1.9. Faydalı Model/Endüstriyel Tasarım Belge Sayısı Verisi Girin", value="0")
-
+    if st.button("Geri"):
+        geri()
+        
         if st.button("Tamamla"):
             data = {
                 "1.7. Ulusal Patent Belge Sayısı Verisi Girin": ulusal_patent,
