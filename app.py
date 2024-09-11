@@ -131,13 +131,27 @@ elif st.session_state.sayfa == 2:
     
     # Veri sözlüğüne erişim butonu yalnızca ad, soyad ve unvan girildiğinde aktif
     if ad and soyad and unvan:
-        st.session_state.ad = ad
-        st.session_state.soyad = soyad
-        st.session_state.unvan = unvan
-        
-        if st.button("Veri Sözlüğü'ne Erişmek İçin Tıklayınız"):
-            st.session_state.sayfa = 3
-
+        st.markdown(
+            """
+            <style>
+            .red-button {
+                background-color: #f44336; /* Kırmızı renk */
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            </style>
+            <a href="#" class="red-button" onclick="streamlit.setComponentValue('veri_sozlugu')">Veri Sözlüğü'ne Erişmek İçin Tıklayınız</a>
+            """,
+            unsafe_allow_html=True
+        )
     
     if st.button("Geri"):
         geri()
