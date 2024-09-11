@@ -107,17 +107,7 @@ if st.session_state.sayfa == 1:
     
     # Şifre girişi
     sifre = st.text_input("Seçtiğiniz birim için şifreyi girin", type="password")
-    
-    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
 
- 
-    # Seçilen kriterin tanımını gösterin
-    if secilen_kriter:
-        st.write(f"**{secilen_kriter} Tanımı:**")
-        st.write(veri_sozlugu[secilen_kriter])
-
-
-    
     if st.button("İleri"):
         # Şifre kontrolü
         if sifre == birim_sifreleri.get(birim_secimi):
@@ -161,7 +151,13 @@ elif st.session_state.sayfa == 3:
     st.write("Lütfen aşağıdaki bilgileri doldurun:")
     
     st.write("Bilgilendirme : Girilmeyen her değer 0 olarak kabul edilecektir.")
-    
+    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
+
+ 
+    # Seçilen kriterin tanımını gösterin
+    if secilen_kriter:
+        st.write(f"**{secilen_kriter} Tanımı:**")
+        st.write(veri_sozlugu[secilen_kriter])
     
     data = {}
     
