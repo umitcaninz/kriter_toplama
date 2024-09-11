@@ -138,7 +138,7 @@ elif st.session_state.sayfa == 2:
             st.session_state.ad = ad
             st.session_state.soyad = soyad
             st.session_state.unvan = unvan
-            st.session_state.sayfa == 3
+            ileri()
             # Ad, soyad ve unvan girildikten sonra 4. sayfaya geç
         else:
             st.write("Lütfen adınızı, soyadınızı ve görevinizi girin.")
