@@ -123,25 +123,26 @@ elif st.session_state.sayfa == 2:
     st.title("Veriyi Giren Kullanıcının Bilgileri")
     st.write(f"Birim: {st.session_state.fakulte_ismi}")
     
-    unvanlar = ["İdari Personel","Akademik Personel"]
+    unvanlar = ["İdari Personel", "Akademik Personel"]
     unvan = st.selectbox("Göreviniz", unvanlar)
     
     ad = st.text_input("Adınız")
     soyad = st.text_input("Soyadınız")
     
-
-    if st.button("Geri"):
+    if st.button("Veri Sözlüğü'ne Erişmek İçin Tıklayınız"):
+        st.session_state.sayfa = 3
+    elif st.button("Geri"):
         geri()
-    if st.button("İleri"):
+    elif st.button("İleri"):
         if ad and soyad:
             st.session_state.ad = ad
             st.session_state.soyad = soyad
             st.session_state.unvan = unvan
 
-            ileri()
+            # Burada veri sözlüğüne erişmeden doğrudan 4. sayfaya geçmek
+            st.session_state.sayfa = 4
         else:
             st.write("Lütfen adınızı ve soyadınızı girin.")
-
 
 elif st.session_state.sayfa == 3:
     st.markdown('<h1 style="color: red;">Veri Sözlüğü</h1>', unsafe_allow_html=True)
