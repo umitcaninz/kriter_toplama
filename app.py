@@ -100,7 +100,7 @@ def geri():
     st.session_state.sayfa -= 1
 
 if st.session_state.sayfa == 1:
-    st.title("Birim Seçimi Ekranı")
+    st.title("Yükseköğretim Kurulu Performans Göstergeleri Kurum İçi Veri Girişi")
     
     # Birim seçimi
     birim_secimi = st.selectbox("Lütfen bir birim seçin", list(birim_sifreleri.keys()))
