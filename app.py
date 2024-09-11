@@ -112,7 +112,6 @@ if st.session_state.sayfa == 1:
 
  
     # Seçilen kriterin tanımını gösterin
-if st.button("Göstergenin Açıklamasını Göster"):
     if secilen_kriter:
         st.write(f"**{secilen_kriter} Tanımı:**")
         st.write(veri_sozlugu[secilen_kriter])
