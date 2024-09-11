@@ -144,7 +144,7 @@ elif st.session_state.sayfa == 2:
 
 
 elif st.session_state.sayfa == 3:
-    st.title("Veri Sözlüğü")
+    st.markdown('<h1 style="color: red;">Veri Sözlüğü</h1>', unsafe_allow_html=True)
     
     secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
     if secilen_kriter:
