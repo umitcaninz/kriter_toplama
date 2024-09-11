@@ -155,7 +155,7 @@ elif st.session_state.sayfa == 2:
 elif st.session_state.sayfa == 3:
     st.markdown('<h1 style="color: red;">Veri Sözlüğü</h1>', unsafe_allow_html=True)
     
-    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
+    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Gösterge Seçin", list(veri_sozlugu.keys()))
     if secilen_kriter:
         st.write(f"**{secilen_kriter} Tanımı:**")
         st.write(veri_sozlugu[secilen_kriter])
@@ -276,8 +276,8 @@ elif st.session_state.sayfa == 4:
                 buffer.seek(0)
                 excel_data = buffer.getvalue()
             
-            subject = "Kriter Verileri"
-            body = f"{st.session_state.fakulte_ismi} birimi {st.session_state.unvan} {st.session_state.ad} {st.session_state.soyad} tarafından gönderilen kriter verileri ekte bulunmaktadır."
+            subject = "Gösterge Verileri"
+            body = f"{st.session_state.fakulte_ismi} birimi {st.session_state.unvan} {st.session_state.ad} {st.session_state.soyad} tarafından gönderilen gösterge verileri ekte bulunmaktadır."
 
             
             # E-posta gönderme fonksiyonunu çağırın
