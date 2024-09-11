@@ -141,9 +141,13 @@ elif st.session_state.sayfa == 2:
             ileri()
         else:
             st.write("Lütfen adınızı ve soyadınızı girin.")
-
-
 elif st.session_state.sayfa == 3:
+    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
+    if secilen_kriter:
+        st.write(f"**{secilen_kriter} Tanımı:**")
+        st.write(veri_sozlugu[secilen_kriter])
+
+elif st.session_state.sayfa == 4:
     st.title("Gösterge Giriş Ekranı")
     st.write(f"Birim: {st.session_state.fakulte_ismi}")
     st.write(f"Kullanıcı: {st.session_state.unvan} {st.session_state.ad} {st.session_state.soyad}")
@@ -239,10 +243,7 @@ elif st.session_state.sayfa == 3:
             st.session_state.form_tamamlandi = True    
     
     
-    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
-    if secilen_kriter:
-        st.write(f"**{secilen_kriter} Tanımı:**")
-        st.write(veri_sozlugu[secilen_kriter])
+
 
     if st.session_state.form_tamamlandi:
         st.success("Form tamamlandı, şimdi gönderebilirsiniz.")
