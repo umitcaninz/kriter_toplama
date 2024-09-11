@@ -143,22 +143,24 @@ elif st.session_state.sayfa == 2:
         else:
             st.write("Lütfen adınızı, soyadınızı ve görevinizi girin.")
 
+# Sayfa 3 içeriği
 if st.session_state.sayfa == 3:
     st.markdown('<h1 style="color: red;">Veri Sözlüğü</h1>', unsafe_allow_html=True)
     
+    # Selectbox için benzersiz bir key atayın
     secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Gösterge Seçin", list(veri_sozlugu.keys()), key="selectbox_key")
     
     if secilen_kriter:
         st.write(f"**{secilen_kriter} Tanımı:**")
         st.write(veri_sozlugu[secilen_kriter])
     
-    # Sayfa geçiş butonları
+    # Sayfa geçiş butonları için benzersiz key'ler ekleyin
     col1, col2 = st.columns([1, 1])
     with col1:
-        if st.button("Geri"):
+        if st.button("Geri", key="geri_button"):
             geri()
     with col2:
-        if st.button("İleri"):
+        if st.button("İleri", key="ileri_button"):
             ileri()
 
 elif st.session_state.sayfa == 4:
