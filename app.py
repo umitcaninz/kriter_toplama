@@ -137,8 +137,7 @@ elif st.session_state.sayfa == 2:
         
         if st.button("Veri Sözlüğü'ne Erişmek İçin Tıklayınız"):
             st.session_state.sayfa = 3
-        else:
-            continue
+
     
     if st.button("Geri"):
         geri()
