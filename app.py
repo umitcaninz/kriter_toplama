@@ -141,7 +141,11 @@ elif st.session_state.sayfa == 2:
             ileri()
         else:
             st.write("Lütfen adınızı ve soyadınızı girin.")
+
+
 elif st.session_state.sayfa == 3:
+    st.title("Veri Sözlüğü")
+    
     secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
     if secilen_kriter:
         st.write(f"**{secilen_kriter} Tanımı:**")
@@ -150,6 +154,8 @@ elif st.session_state.sayfa == 3:
         geri()
     if st.button("İleri"):
         ileri()
+
+
 elif st.session_state.sayfa == 4:
     st.title("Gösterge Giriş Ekranı")
     st.write(f"Birim: {st.session_state.fakulte_ismi}")
