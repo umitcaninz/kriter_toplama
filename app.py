@@ -137,8 +137,8 @@ elif st.session_state.sayfa == 2:
         
         if st.button("Veri Sözlüğü'ne Erişmek İçin Tıklayınız"):
             st.session_state.sayfa = 3
-    else:
-        st.write("Veri sözlüğüne erişmek için adınızı, soyadınızı ve görevinizi girin.")
+        else:
+            continue
     
     if st.button("Geri"):
         geri()
