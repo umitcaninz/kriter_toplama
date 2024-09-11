@@ -11,9 +11,9 @@ from email.mime.application import MIMEApplication
 
 
 birim_sifreleri = {
-    "ARDEK": "Öğrenci İşleri",
-    "sifre2": "BAP",
-    "sifre3": "TTO"
+    "Öğrenci İşleri": "ARDEK",
+    "BAP": "sifre2",
+    "TTO": "sifre3"
 }
 
 def birim_ismini_al(sifre):
@@ -62,13 +62,19 @@ def geri():
     st.session_state.sayfa -= 1
 
 if st.session_state.sayfa == 1:
-    st.title("Birim Şifresi Girme Ekranı")
-    sifre = st.text_input("Şifre Girin", type="password")
+    st.title("Birim Seçimi Ekranı")
+    
+    # Birim seçimi
+    birim_secimi = st.selectbox("Lütfen bir birim seçin", list(birim_sifreleri.keys()))
+    
+    # Şifre girişi
+    sifre = st.text_input("Seçtiğiniz birim için şifreyi girin", type="password")
+    
     if st.button("İleri"):
-        birim_ismi = birim_ismini_al(sifre)
-        if birim_ismi:
-            st.session_state.fakulte_ismi = birim_ismi
-            ileri()
+        # Şifre kontrolü
+        if sifre == birim_sifreleri.get(birim_secimi):
+            st.session_state.fakulte_ismi = birim_secimi
+            ileri()  # Şifre doğruysa sonraki sayfaya geçiş
         else:
             st.write("Geçersiz şifre. Lütfen tekrar deneyin.")
             
