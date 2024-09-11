@@ -120,7 +120,7 @@ if st.session_state.sayfa == 1:
             
 
 
-if st.session_state.sayfa == 2:
+elif st.session_state.sayfa == 2:
     st.title("Veriyi Giren Kullanıcının Bilgileri")
     st.write(f"Birim: {st.session_state.fakulte_ismi}")
     
@@ -142,7 +142,7 @@ if st.session_state.sayfa == 2:
             st.write("Lütfen adınızı, soyadınızı ve görevinizi girin.")
 
 # Sayfa 3 içeriği
-if st.session_state.sayfa == 3:
+elif st.session_state.sayfa == 3:
     st.markdown('<h1 style="color: red;">Veri Sözlüğü</h1>', unsafe_allow_html=True)
     
     # Selectbox için benzersiz bir key atayın
