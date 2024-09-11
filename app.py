@@ -121,25 +121,24 @@ if st.session_state.sayfa == 1:
             
 
 
-elif st.session_state.sayfa == 2:
+if st.session_state.sayfa == 2:
     st.title("Veriyi Giren Kullanıcının Bilgileri")
     st.write(f"Birim: {st.session_state.fakulte_ismi}")
     
     unvanlar = ["İdari Personel", "Akademik Personel"]
-    unvan = st.selectbox("Göreviniz", unvanlar)
+    unvan = st.selectbox("Göreviniz", unvanlar, key="unvan_selectbox")
     
-    ad = st.text_input("Adınız")
-    soyad = st.text_input("Soyadınız")
+    ad = st.text_input("Adınız", key="ad_input")
+    soyad = st.text_input("Soyadınız", key="soyad_input")
      
-    if st.button("Geri"):
+    if st.button("Geri", key="geri_button_2"):
         geri()
-    elif st.button("İleri"):
+    elif st.button("İleri", key="ileri_button_2"):
         if ad and soyad and unvan:
             st.session_state.ad = ad
             st.session_state.soyad = soyad
             st.session_state.unvan = unvan
             ileri()
-            # Ad, soyad ve unvan girildikten sonra 4. sayfaya geç
         else:
             st.write("Lütfen adınızı, soyadınızı ve görevinizi girin.")
 
@@ -157,11 +156,13 @@ if st.session_state.sayfa == 3:
     # Sayfa geçiş butonları için benzersiz key'ler ekleyin
     col1, col2 = st.columns([1, 1])
     with col1:
-        if st.button("Geri", key="geri_button"):
+        if st.button("Geri", key="geri_button_3"):
             geri()
     with col2:
-        if st.button("İleri", key="ileri_button"):
+        if st.button("İleri", key="ileri_button_3"):
             ileri()
+
+
 
 elif st.session_state.sayfa == 4:
     st.title("Gösterge Giriş Ekranı")
