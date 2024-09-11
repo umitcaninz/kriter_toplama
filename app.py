@@ -11,7 +11,7 @@ from email.mime.application import MIMEApplication
 
 
 birim_sifreleri = {
-    "sifre1": "Öğrenci İşleri",
+    "ARDEK": "Öğrenci İşleri",
     "sifre2": "BAP",
     "sifre3": "TTO"
 }
