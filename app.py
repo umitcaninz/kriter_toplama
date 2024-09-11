@@ -154,7 +154,7 @@ elif st.session_state.sayfa == 2:
 
 
 elif st.session_state.sayfa == 3:
-    st.title("Kriter Giriş Ekranı")
+    st.title("Gösterge Giriş Ekranı")
     st.write(f"Birim: {st.session_state.fakulte_ismi}")
     st.write(f"Kullanıcı: {st.session_state.unvan} {st.session_state.ad} {st.session_state.soyad}")
     
