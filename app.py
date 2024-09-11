@@ -152,7 +152,7 @@ elif st.session_state.sayfa == 3:
                 "2.2.Incites %10 Dilime Giren Yayın Oranı": incites_10_dilim,
                 "2.5. Açık Erişim Yüzdesi" : acik_erisim,
                 "3.1.Üniversite-Üniversite İşbirlikli Yayın Oranı" : unv_unv_isbirlik,
-                "3.2. Üniversite-Sanayi İşbirlikli Yayın Oranı" : unv_sanayi
+                "3.2. Üniversite-Sanayi İşbirlikli Yayın Oranı" : unv_sanayi,
                 "3.3. Uluslararası İşbirlikli Yayın Oranı" : uluslarararası_isbirlik
             }
             st.session_state.df = pd.DataFrame([data])
