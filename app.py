@@ -93,11 +93,13 @@ if 'sayfa' not in st.session_state:
 if 'form_gonderildi' not in st.session_state:
     st.session_state.form_gonderildi = False
 
-def ileri():
-    st.session_state.sayfa += 1
-
 def geri():
-    st.session_state.sayfa -= 1
+    if st.session_state.sayfa > 1:
+        st.session_state.sayfa -= 1
+
+def ileri():
+    if st.session_state.sayfa < 4:  # Sayfa sınırını ayarlayın
+        st.session_state.sayfa += 1
 
 if st.session_state.sayfa == 1:
     st.title("Yükseköğretim Kurulu Performans Göstergeleri Kurum İçi Veri Girişi")
@@ -141,10 +143,10 @@ elif st.session_state.sayfa == 2:
         else:
             st.write("Lütfen adınızı, soyadınızı ve görevinizi girin.")
 
-elif st.session_state.sayfa == 3:
+if st.session_state.sayfa == 3:
     st.markdown('<h1 style="color: red;">Veri Sözlüğü</h1>', unsafe_allow_html=True)
     
-    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Gösterge Seçin", list(veri_sozlugu.keys()))
+    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Gösterge Seçin", list(veri_sozlugu.keys()), key="selectbox_key")
     
     if secilen_kriter:
         st.write(f"**{secilen_kriter} Tanımı:**")
@@ -158,7 +160,6 @@ elif st.session_state.sayfa == 3:
     with col2:
         if st.button("İleri"):
             ileri()
-
 
 elif st.session_state.sayfa == 4:
     st.title("Gösterge Giriş Ekranı")
