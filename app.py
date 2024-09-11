@@ -108,9 +108,11 @@ if st.session_state.sayfa == 1:
     # Şifre girişi
     sifre = st.text_input("Seçtiğiniz birim için şifreyi girin", type="password")
     
-    secilen_kriter = st.selectbox("Bir Performans İzleme Kriteri Seçin", list(veri_sozlugu.keys()))
+    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
 
+ 
     # Seçilen kriterin tanımını gösterin
+ if st.button("Göstergenin Açıklamasını Göster"):
     if secilen_kriter:
         st.write(f"**{secilen_kriter} Tanımı:**")
         st.write(veri_sozlugu[secilen_kriter])
