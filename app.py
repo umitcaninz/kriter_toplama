@@ -33,8 +33,8 @@ def send_email(recipient_email, subject, body, attachment):
     
     msg.attach(MIMEText(body, 'plain'))
     
-    part = MIMEApplication(attachment, Name="form_verileri.xlsx")
-    part['Content-Disposition'] = 'attachment; filename="form_verileri.xlsx"'
+    part = MIMEApplication(attachment, Name="kriter_verileri.xlsx")
+    part['Content-Disposition'] = 'attachment; filename="kriter_verileri.xlsx"'
     msg.attach(part)
     
     try:
