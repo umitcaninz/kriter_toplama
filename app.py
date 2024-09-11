@@ -131,6 +131,10 @@ elif st.session_state.sayfa == 2:
     
     # Veri sözlüğüne erişim butonu yalnızca ad, soyad ve unvan girildiğinde aktif
     if ad and soyad and unvan:
+        st.session_state.ad = ad
+        st.session_state.soyad = soyad
+        st.session_state.unvan = unvan
+        
         if st.button("Veri Sözlüğü'ne Erişmek İçin Tıklayınız"):
             st.session_state.sayfa = 3
     else:
