@@ -151,11 +151,10 @@ elif st.session_state.sayfa == 3:
     st.write("Lütfen aşağıdaki bilgileri doldurun:")
     
     st.write("Bilgilendirme : Girilmeyen her değer 0 olarak kabul edilecektir.")
-    if st.button("Veri Sözlüğü için Tıklayınız"):
-        secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
-        if secilen_kriter:
-            st.write(f"**{secilen_kriter} Tanımı:**")
-            st.write(veri_sozlugu[secilen_kriter])
+    secilen_kriter = st.selectbox("Veri Sözlüğü İçin Bir Kriter Seçin", list(veri_sozlugu.keys()))
+    if secilen_kriter:
+        st.write(f"**{secilen_kriter} Tanımı:**")
+        st.write(veri_sozlugu[secilen_kriter])
     
     data = {}
     
