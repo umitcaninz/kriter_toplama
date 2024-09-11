@@ -109,13 +109,20 @@ if st.session_state.sayfa == 1:
     # Şifre girişi
     sifre = st.text_input("Seçtiğiniz birim için şifreyi girin", type="password")
 
-    if st.button("İleri"):
-        # Şifre kontrolü
-        if sifre == birim_sifreleri.get(birim_secimi):
-            st.session_state.fakulte_ismi = birim_secimi
-            ileri()  # Şifre doğruysa sonraki sayfaya geçiş
-        else:
-            st.write("Geçersiz şifre. Lütfen tekrar deneyin.")
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        if st.button("Geri"):
+            geri()
+    
+    with col2:
+        if st.button("İleri"):
+            # Şifre kontrolü
+            if sifre == birim_sifreleri.get(birim_secimi):
+                st.session_state.fakulte_ismi = birim_secimi
+                ileri()  # Şifre doğruysa sonraki sayfaya geçiş
+            else:
+                st.write("Geçersiz şifre. Lütfen tekrar deneyin.")
             
             
 
@@ -130,16 +137,21 @@ elif st.session_state.sayfa == 2:
     ad = st.text_input("Adınız", key="ad_input")
     soyad = st.text_input("Soyadınız", key="soyad_input")
      
-    if st.button("Geri", key="geri_button_2"):
-        geri()
-    elif st.button("İleri", key="ileri_button_2"):
-        if ad and soyad and unvan:
-            st.session_state.ad = ad
-            st.session_state.soyad = soyad
-            st.session_state.unvan = unvan
-            ileri()
-        else:
-            st.write("Lütfen adınızı, soyadınızı ve görevinizi girin.")
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        if st.button("Geri", key="geri_button_2"):
+            geri()
+    
+    with col2:
+        if st.button("İleri", key="ileri_button_2"):
+            if ad and soyad and unvan:
+                st.session_state.ad = ad
+                st.session_state.soyad = soyad
+                st.session_state.unvan = unvan
+                ileri()
+            else:
+                st.write("Lütfen adınızı, soyadınızı ve görevinizi girin.")
 
 # Sayfa 3 içeriği
 elif st.session_state.sayfa == 3:
