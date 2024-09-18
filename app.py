@@ -7,6 +7,109 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 
+import streamlit as st
+import pandas as pd
+import io
+from sklearn.preprocessing import MinMaxScaler
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+import requests
+import base64
+import json
+
+# GitHub ve SMTP ayarları
+token = "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"
+repo_owner = "umitcaninz"
+repo_name = "form"
+file_path = "kriter.xlsx"
+github_api_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path}"
+
+smtp_server = "smtp.gmail.com"
+smtp_port = 587
+sender_email = "umitcaninozu@gmail.com"
+sender_password = "hodt sryq ekqs riai"
+
+# GitHub fonksiyonları
+def upload_to_github(content, sha=None):
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+
+    data = {
+        "message": "Kriter verisi güncellendi",
+        "content": base64.b64encode(content).decode("utf-8"),
+        "branch": "main"
+    }
+
+    if sha:
+        data["sha"] = sha
+
+    response = requests.put(github_api_url, headers=headers, data=json.dumps(data))
+    return response
+
+def download_from_github():
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+
+    response = requests.get(github_api_url, headers=headers)
+    if response.status_code == 200:
+        file_content = base64.b64decode(response.json()['content'])
+        sha = response.json()['sha']
+        return file_content, sha
+    return None, None
+
+def update_excel(new_data):
+    content, sha = download_from_github()
+
+    if content:
+        with open("kriter.xlsx", "wb") as f:
+            f.write(content)
+        
+        df_existing = pd.read_excel("kriter.xlsx")
+        df_new = pd.DataFrame([new_data])
+        df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+        
+        # Dosyayı kaydet
+        df_combined.to_excel("kriter.xlsx", index=False)
+        
+        # GitHub'a geri yükle
+        with open("kriter.xlsx", "rb") as f:
+            upload_to_github(f.read(), sha)
+        return df_combined
+
+# E-posta gönderme fonksiyonu
+def send_email(recipient_email, subject, body, attachment):
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
+    msg['Subject'] = subject
+    
+    msg.attach(MIMEText(body, 'plain'))
+    
+    part = MIMEApplication(attachment, Name="kriter_verileri.xlsx")
+    part['Content-Disposition'] = 'attachment; filename="kriter_verileri.xlsx"'
+    msg.attach(part)
+    
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()  
+            server.login(sender_email, sender_password) 
+            server.send_message(msg)
+            print(f"Email sent to {recipient_email}")
+        
+        print("SMTP server connection closed.")
+    
+    except Exception as e:
+        print(f"Error sending email to {recipient_email}: {e}")
+
+# Mevcut veri sözlüğü ve birim şifreleri
+
+
 veri_sozlugu = {
     "1.1. Bilimsel Yayın Sayısı": "2022 yılında ISI Citation Index (SCI, SCI-E, SSCI ve A&HCI) veri tabanında taranan dergilerdeki makale (article) ve derleme (review) türündeki yayın sayısı.",
     "1.2. Atıf Sayısı": "ISI Citation Index (SCI, SCI-E, SSCI ve A&HCI) veri tabanında taranan dergilerde 2017-2022 yıllarını kapsayan dönemde yayınlanan tüm makale ve derlemelere yapılan toplam atıf sayısı.",
@@ -57,35 +160,7 @@ birim_sifreleri = {
 def birim_ismini_al(sifre):
     return birim_sifreleri.get(sifre, None)
 
-smtp_server = "smtp.gmail.com"
-smtp_port = 587
 
-sender_email = "umitcaninozu@gmail.com"
-sender_password = "hodt sryq ekqs riai"
-
-def send_email(recipient_email, subject, body, attachment):
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = recipient_email
-    msg['Subject'] = subject
-    
-    msg.attach(MIMEText(body, 'plain'))
-    
-    part = MIMEApplication(attachment, Name="kriter_verileri.xlsx")
-    part['Content-Disposition'] = 'attachment; filename="kriter_verileri.xlsx"'
-    msg.attach(part)
-    
-    try:
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()  
-            server.login(sender_email, sender_password) 
-            server.send_message(msg)
-            print(f"Email sent to {recipient_email}")
-        
-        print("SMTP server connection closed.")
-    
-    except Exception as e:
-        print(f"Error sending email to {recipient_email}: {e}")
 
 if 'sayfa' not in st.session_state:
     st.session_state.sayfa = 1
@@ -99,14 +174,10 @@ def ileri():
 def geri():
     st.session_state.sayfa -= 1
 
-
 if st.session_state.sayfa == 1:
     st.title("Yükseköğretim Kurulu Performans Göstergeleri Kurum İçi Veri Girişi")
     
-    # Birim seçimi
     birim_secimi = st.selectbox("Lütfen bir birim seçin", list(birim_sifreleri.keys()))
-    
-    # Şifre girişi
     sifre = st.text_input("Seçtiğiniz birim için şifreyi girin", type="password")
 
     col1, col2 = st.columns([1, 1])
@@ -117,12 +188,12 @@ if st.session_state.sayfa == 1:
     
     with col2:
         if st.button("İleri"):
-            # Şifre kontrolü
             if sifre == birim_sifreleri.get(birim_secimi):
                 st.session_state.fakulte_ismi = birim_secimi
-                ileri()  # Şifre doğruysa sonraki sayfaya geçiş
+                ileri()
             else:
                 st.write("Geçersiz şifre. Lütfen tekrar deneyin.")
+
             
             
 
@@ -289,13 +360,14 @@ elif st.session_state.sayfa == 4:
             subject = "Gösterge Verileri"
             body = f"{st.session_state.fakulte_ismi} birimi {st.session_state.unvan} {st.session_state.ad} {st.session_state.soyad} tarafından gönderilen gösterge verileri ekte bulunmaktadır."
 
+            # GitHub'a yükle ve güncelle
+            updated_df = update_excel(st.session_state.df.to_dict('records')[0])
             
             # E-posta gönderme fonksiyonunu çağırın
             send_email(recipient_email, subject, body, excel_data)
             
             st.session_state.form_gonderildi = True
-            st.success("E-posta başarıyla gönderildi.")
-
+            st.success("Veriler başarıyla GitHub'a yüklendi ve e-posta gönderildi.")
 
                        
                        
